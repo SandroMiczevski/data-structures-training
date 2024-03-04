@@ -44,17 +44,14 @@ class DoublyLinkedList{
         if (head == null) return null;
 
         Node temp = tail;
-
         if (size == 1){
             head = null;
             tail = null;
         } else {
-    
             tail = tail.prev;
             tail.next = null;
             size--;
         }
-
         return temp;
     }
 
