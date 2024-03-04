@@ -51,7 +51,7 @@ class DoublyLinkedList{
         } else {
     
             tail = tail.prev;
-            temp.prev = null;
+            tail.next = null;
             size--;
         }
 
@@ -93,9 +93,7 @@ class DoublyLinkedList{
 
     public Node get(int index){
         // check for edge cases first;
-        if (index < 0 || index > size) return null;
-        else if (index == 0) return removeFirst();
-        else if (index == size) return removeLast();
+        if (index < 0 || index >= size) return null;
 
         Node temp = head;
 
@@ -115,17 +113,66 @@ class DoublyLinkedList{
             }
         }
 
-        // Make changes on previous and next nodes of index;
-        Node previous_node = temp.prev;
-        Node next_node = temp.next;
+        return temp;
+    }
 
-        previous_node.next = next_node;
-        next_node.prev = previous_node;
+    public boolean set(int index, int value) {
+        //Updates the value on a given node;
+        Node temp = get(index);
 
-        // Adjusts the accesses on index;
+
+        if (temp != null){
+            temp.value = value;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean insert (int index, int value){
+        if (index < 0 || index >= size) {
+            return false;
+        } else if (head == null || index == 0) {
+            prepend(value);
+            return true;
+        } else if (index == size-1){
+            append(value);
+            return true;
+        }
+
+        Node previous = get(index-1); // Get the previous node to where I want to insert a new one
+        if (previous != null){
+            Node temp = new Node(value);
+            Node next = previous.next;
+    
+            temp.prev = previous;
+            temp.next = previous.next;
+            previous.next = temp;
+            next.prev = temp;
+    
+            size++;
+            return true;
+        }
+        return false;
+    }
+
+    public Node remove (int index){
+        if (index < 0 || index > size) return null;
+        else if (index == 0) return removeFirst();
+        else if (index == size - 1) return removeLast();
+        
+        Node temp = get(index);
+        Node before = temp.prev;
+        Node after = temp.next;
+
+        before.next = temp.next;
+        after.prev = temp.prev;
+
         temp.next = null;
         temp.prev = null;
+        
         size--;
+
         return temp;
     }
 
