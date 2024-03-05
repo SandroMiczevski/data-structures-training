@@ -22,6 +22,27 @@ public class Stack {
         this.size = 1;
     }
 
+    public void Push (int value){
+        Node new_node = new Node(value);
+        new_node.next = top;
+        top = new_node;
+        size++;
+    }
+
+    public Node Pop(){
+        if (top == null) return null;
+        
+        Node temp = top;
+
+        if (top.next == null){
+            top = null;
+        } else {
+            top = top.next;
+            temp.next = null;
+        }
+        size--;
+        return temp;
+    }
 
     // Methods for information
 
@@ -30,6 +51,11 @@ public class Stack {
     }
     
     public void getTop(){
+        if (top==null) {
+            System.out.println("Top is null");
+            return;
+        }
+
         System.out.println("Top has a value of: " + this.top.value);
     }
 
