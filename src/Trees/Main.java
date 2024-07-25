@@ -1,10 +1,9 @@
+// import Lists.Stack;
+// import Queue.Queue;
+//import BinarySearchTree;
+package Trees;
 
-
-import Lists.Stack;
-import Queue.Queue;
-import Trees.BinarySearchTree;
-
-public class App {
+public class Main {
 
     public static void main(String[] args) {
 
